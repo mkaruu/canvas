@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas Game</title>
+
+    <style>
+            canvas {
+            border:2px solid black;
+            background-color:rgb(252, 248, 248);
+        }
+    
+    </style>
+</head>
+
+<body onload=>
+
+    <canvas id="myCanvas" tabindex='1' width="800" height="500"></canvas>
+    <button onclick="window.location.reload()">Reset</button>
+
+
+    <script type = "text/javascript">
+    let log = console.log;
+//Declare global variables here
+    var md = false;
+    var keyG = false;
+    var keyR = false;
+    var keyY = false;
+    var keyB = false;
+    var keySpace = false;
+    var size = 24;
+    var myCanvas = document.getElementById("myCanvas");
+    var ctx = myCanvas.getContext("2d");
+
+//add event listeners here//
+    myCanvas.addEventListener("mousedown", down);
+    myCanvas.addEventListener("mouseup", toggledraw);
+    myCanvas.addEventListener("keyup", keyGfunc);
+    myCanvas.addEventListener("keyup", keyRfunc);
+    myCanvas.addEventListener("keyup", keyYfunc);
+    myCanvas.addEventListener("keyup", keyBfunc);
+    myCanvas.addEventListener("keyup", keyUpfunc);
+    myCanvas.addEventListener("keyup", keyDownfunc);
+    myCanvas.addEventListener("keyup", keySpacefunc);
+    myCanvas.addEventListener("mousemove",
+    function(evt){
+    var mousePos = getMousePos(myCanvas, evt);
+    var posx = mousePos.x;
+    var posy = mousePos.y;
+    draw(myCanvas, posx, posy);
+});   
+
+    function getMousePos(myCanvas, evt){
+    var rect = myCanvas.getBoundingClientRect();
+    return {
+        x:evt.clientX - rect.left,
+        y:evt.clientY - rect.top
+    };
+}
+
+    function down (){
+    md = true;
+    }
+
+    function keyGfunc(e) {
+    var keyCode = e.keyCode;    
+        if(keyCode==71) {
+            keyG = true;
+        }
+}
+    function keyRfunc(e) {
+        var keyCode = e.keyCode;    
+            if(keyCode==82) {
+                keyR = true;    
+        }
+}
+    function keyYfunc(e) {
+            var keyCode = e.keyCode;    
+                if(keyCode==89) {
+                    keyY = true;    
+            }
+}
+
+    function keyBfunc(e) {
+            var keyCode = e.keyCode;    
+                if(keyCode==66) {
+                    keyB = true;    
+            }
+}
+
+    function keySpacefunc(e) {
+        var keyCode = e.keyCode;    
+                if(keyCode==32) {
+                window.location.reload();    
+            }
+
+    }
+
+    function keyUpfunc(e) {
+        var keyCode = e.keyCode;    
+                if(keyCode==38) {
+                size = 40;    
+            }
+
+    }
+
+    function keyDownfunc(e) {
+    var keyCode = e.keyCode;    
+            if(keyCode==40) {
+            size = 10;    
+        }
+
+}
+
+    function toggledraw (){
+        md = false;
+    }
+
+
+     
+    function draw(myCanvas, posx, posy) {
+        var ctx = myCanvas.getContext("2d");
+        if (md) {
+            if (keyG) {
+            myCanvas.style.cursor = "pointer";
+            ctx.fillRect(posx, posy, size, size);
+            var color = ctx.fillStyle="green";
+        } if (keyR) {
+            myCanvas.style.cursor = "pointer";
+            ctx.fillRect(posx, posy, size, size);
+            var color = ctx.fillStyle="red";
+        } if (keyY) {
+            myCanvas.style.cursor = "pointer";
+            ctx.fillRect(posx, posy, size, size);
+            var color = ctx.fillStyle="yellow";
+        } if (keyB) {
+            myCanvas.style.cursor = "pointer";
+            ctx.fillRect(posx, posy, size, size);
+            var color = ctx.fillStyle="blue";
+        } else {
+            myCanvas.style.cursor = "pointer";
+            ctx.fillRect(posx, posy, size, size);
+            var color = ctx.fillStyle="black";
+        }
+    }       
+}
+
+</script>
+    
+</body>
+</html>
